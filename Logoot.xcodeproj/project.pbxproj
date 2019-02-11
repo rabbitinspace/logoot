@@ -13,6 +13,8 @@
 		CEC0D0052211882C00B45D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEC0D0042211882C00B45D80 /* Assets.xcassets */; };
 		CEC0D0082211882C00B45D80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC0D0062211882C00B45D80 /* LaunchScreen.storyboard */; };
 		CEC0D0132211882C00B45D80 /* LogootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D0122211882C00B45D80 /* LogootTests.swift */; };
+		CEC0D01F2211884D00B45D80 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D01E2211884D00B45D80 /* Document.swift */; };
+		CEC0D0212211887400B45D80 /* ID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D0202211887400B45D80 /* ID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		CEC0D00E2211882C00B45D80 /* LogootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LogootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC0D0122211882C00B45D80 /* LogootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogootTests.swift; sourceTree = "<group>"; };
 		CEC0D0142211882C00B45D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEC0D01E2211884D00B45D80 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		CEC0D0202211887400B45D80 /* ID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		CEC0CFFC2211882A00B45D80 /* Logoot */ = {
 			isa = PBXGroup;
 			children = (
+				CEC0D01D2211883200B45D80 /* CRDT */,
 				CEC0CFFD2211882A00B45D80 /* AppDelegate.swift */,
 				CEC0CFFF2211882A00B45D80 /* ViewController.swift */,
 				CEC0D0012211882A00B45D80 /* Main.storyboard */,
@@ -94,6 +99,15 @@
 				CEC0D0142211882C00B45D80 /* Info.plist */,
 			);
 			path = LogootTests;
+			sourceTree = "<group>";
+		};
+		CEC0D01D2211883200B45D80 /* CRDT */ = {
+			isa = PBXGroup;
+			children = (
+				CEC0D01E2211884D00B45D80 /* Document.swift */,
+				CEC0D0202211887400B45D80 /* ID.swift */,
+			);
+			path = CRDT;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC0D0212211887400B45D80 /* ID.swift in Sources */,
 				CEC0D0002211882A00B45D80 /* ViewController.swift in Sources */,
 				CEC0CFFE2211882A00B45D80 /* AppDelegate.swift in Sources */,
+				CEC0D01F2211884D00B45D80 /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
