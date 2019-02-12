@@ -9,6 +9,7 @@
 import Foundation
 
 typealias SiteID = UInt64
+typealias Position = [ID]
 
 struct ID {
     let position: UInt16
@@ -16,10 +17,10 @@ struct ID {
 }
 
 final class AtomID {
-    let position: [ID]
+    let position: Position
     let clock: UInt64
 
-    init(position: [ID], clock: UInt64) {
+    init(position: Position, clock: UInt64) {
         self.position = position
         self.clock = clock
     }

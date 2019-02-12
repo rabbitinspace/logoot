@@ -11,24 +11,51 @@ import XCTest
 
 class LogootTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testInsert() {
+        let doc = Document(site: 0)
+        
+        doc.insert("a", at: 0)
+        XCTAssertEqual(doc.string, "a")
+        
+        doc.insert("b", at: 1)
+        XCTAssertEqual(doc.string, "ab")
+        
+        doc.insert("c", at: 1)
+        XCTAssertEqual(doc.string, "acb")
+        
+        doc.insert("d", at: 3)
+        XCTAssertEqual(doc.string, "acbd")
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testDelete() {
+        let doc = Document(site: 0)
+        doc.insert("a", at: 0)
+        doc.insert("b", at: 1)
+        doc.insert("c", at: 2)
+        doc.insert("d", at: 3)
+        XCTAssertEqual(doc.string, "abcd")
+        
+        doc.remove(at: 2)
+        XCTAssertEqual(doc.string, "abd")
+        
+        doc.remove(at: 2)
+        XCTAssertEqual(doc.string, "ab")
+        
+        doc.remove(at: 0)
+        XCTAssertEqual(doc.string, "b")
+        
+        doc.remove(at: 0)
+        XCTAssertEqual(doc.string, "")
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testInsertDelete() {
+        let doc = Document(site: 0)
+        
+        doc.insert("a", at: 0)
+        doc.insert("b", at: 1)
+        doc.insert("c", at: 0)
+        doc.remove(at: 1)
+        XCTAssertEqual(doc.string, "cb")
     }
 
 }
