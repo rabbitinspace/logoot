@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE141E21221415770005E3B8 /* CoopEditingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141E20221415770005E3B8 /* CoopEditingTests.swift */; };
 		CEC0CFFE2211882A00B45D80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CFFD2211882A00B45D80 /* AppDelegate.swift */; };
 		CEC0D0002211882A00B45D80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CFFF2211882A00B45D80 /* ViewController.swift */; };
 		CEC0D0032211882A00B45D80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC0D0012211882A00B45D80 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE141E20221415770005E3B8 /* CoopEditingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopEditingTests.swift; sourceTree = "<group>"; };
 		CEC0CFFA2211882A00B45D80 /* Logoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC0CFFD2211882A00B45D80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEC0CFFF2211882A00B45D80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				CEC0D0122211882C00B45D80 /* LogootTests.swift */,
 				CEC0D0142211882C00B45D80 /* Info.plist */,
+				CE141E20221415770005E3B8 /* CoopEditingTests.swift */,
 			);
 			path = LogootTests;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC0D0132211882C00B45D80 /* LogootTests.swift in Sources */,
+				CE141E21221415770005E3B8 /* CoopEditingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

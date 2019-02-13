@@ -48,7 +48,7 @@ final class Document {
         return Operation(kind: .remove, position: atom.id.position, site: site, char: atom.char)
     }
     
-    func apply(_ operation: Operation) {
+    func apply(_ operation: Operation) -> LocalOperation? {
         switch operation.kind {
         case .insert:
             let id = atomID(with: operation.position, for: operation.site)
@@ -56,13 +56,17 @@ final class Document {
             let index = content.insertionIndex(of: atom)
             
             content.insert(atom, at: index)
+            return LocalOperation(kind: .insert, index: index - 1, char: operation.char)
             
         case .remove:
             let id = atomID(with: operation.position, for: operation.site)
             if let index = content.firstIndex(where: { $0.id.order(relativeTo: id) == .equal }) {
                 content.remove(at: index)
+                return LocalOperation(kind: .remove, index: index - 1, char: operation.char)
             }
         }
+        
+        return nil
     }
     
     private func generatePosition(previous: Position, next: Position, site: SiteID) -> Position {

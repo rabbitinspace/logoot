@@ -46,24 +46,30 @@ protocol Ordering {
     func order(relativeTo other: Self) -> Order
 }
 
+enum OperationKind: Int, Codable {
+    case insert
+    case remove
+}
+
 final class Operation: Codable {
 
-    enum Kind: Int, Codable {
-        case insert
-        case remove
-    }
-
-    let kind: Kind
+    let kind: OperationKind
     let position: Position
     let site: SiteID
     let char: Unicode.Scalar
 
-    init(kind: Kind, position: Position, site: SiteID, char: Unicode.Scalar) {
+    init(kind: OperationKind, position: Position, site: SiteID, char: Unicode.Scalar) {
         self.kind = kind
         self.position = position
         self.site = site
         self.char = char
     }
+}
+
+struct LocalOperation {
+    let kind: OperationKind
+    let index: Int
+    let char: Unicode.Scalar
 }
 
 // MARK: - Extensions
