@@ -11,7 +11,7 @@ import Foundation
 typealias SiteID = UInt64
 typealias Position = [ID]
 
-struct ID {
+struct ID: Codable {
     let position: UInt16
     let site: SiteID
 }
@@ -44,6 +44,26 @@ enum Order {
 
 protocol Ordering {
     func order(relativeTo other: Self) -> Order
+}
+
+final class Operation: Codable {
+
+    enum Kind: Int, Codable {
+        case insert
+        case remove
+    }
+
+    let kind: Kind
+    let position: Position
+    let site: SiteID
+    let char: Unicode.Scalar
+
+    init(kind: Kind, position: Position, site: SiteID, char: Unicode.Scalar) {
+        self.kind = kind
+        self.position = position
+        self.site = site
+        self.char = char
+    }
 }
 
 // MARK: - Extensions
@@ -93,5 +113,25 @@ extension AtomID: Ordering {
         }
         
         return .equal
+    }
+}
+
+extension Atom: Ordering {
+    func order(relativeTo other: Atom) -> Order {
+        return id.order(relativeTo: other.id)
+    }
+}
+
+extension Unicode.Scalar: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let value = try container.decode(UInt32.self)
+        
+        self.init(value)!
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(value)
     }
 }

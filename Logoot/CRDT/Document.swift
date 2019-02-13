@@ -25,7 +25,8 @@ final class Document {
         ]
     }
     
-    func insert(_ char: Unicode.Scalar, at index: Int) {
+    @discardableResult
+    func insert(_ char: Unicode.Scalar, at index: Int) -> Operation {
         defer { assert(content.count >= 2) }
         
         let position = generatePosition(
@@ -36,12 +37,32 @@ final class Document {
         
         let atom = Atom(id: atomID(with: position, for: site), char: char)
         content.insert(atom, at: index + 1)
+        return Operation(kind: .insert, position: atom.id.position, site: site, char: atom.char)
     }
     
-    func remove(at index: Int) {
+    @discardableResult
+    func remove(at index: Int) -> Operation {
         defer { assert(content.count >= 2) }
         
-        content.remove(at: index + 1)
+        let atom = content.remove(at: index + 1)
+        return Operation(kind: .remove, position: atom.id.position, site: site, char: atom.char)
+    }
+    
+    func apply(_ operation: Operation) {
+        switch operation.kind {
+        case .insert:
+            let id = atomID(with: operation.position, for: operation.site)
+            let atom = Atom(id: id, char: operation.char)
+            let index = content.insertionIndex(of: atom)
+            
+            content.insert(atom, at: index)
+            
+        case .remove:
+            let id = atomID(with: operation.position, for: operation.site)
+            if let index = content.firstIndex(where: { $0.id.order(relativeTo: id) == .equal }) {
+                content.remove(at: index)
+            }
+        }
     }
     
     private func generatePosition(previous: Position, next: Position, site: SiteID) -> Position {
@@ -105,5 +126,18 @@ private extension Array {
         guard index >= startIndex else { return nil }
         
         return self[index]
+    }
+}
+
+private extension Array where Element: Ordering {
+    // TODO: binary search
+    func insertionIndex(of element: Element) -> Index {
+        for i in startIndex ..< endIndex {
+            if self[i].order(relativeTo: element) != .less {
+                return i
+            }
+        }
+        
+        return endIndex
     }
 }
