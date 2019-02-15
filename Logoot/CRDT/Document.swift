@@ -26,7 +26,7 @@ final class Document {
     }
     
     @discardableResult
-    func insert(_ char: Unicode.Scalar, at index: Int) -> Operation {
+    func insert(_ char: Unicode.Scalar, at index: Int) -> RemoteOperation {
         defer { assert(content.count >= 2) }
         
         let position = generatePosition(
@@ -37,18 +37,18 @@ final class Document {
         
         let atom = Atom(id: atomID(with: position, for: site), char: char)
         content.insert(atom, at: index + 1)
-        return Operation(kind: .insert, position: atom.id.position, site: site, char: atom.char)
+        return RemoteOperation(kind: .insert, position: atom.id.position, site: site, char: atom.char)
     }
     
     @discardableResult
-    func remove(at index: Int) -> Operation {
+    func remove(at index: Int) -> RemoteOperation {
         defer { assert(content.count >= 2) }
         
         let atom = content.remove(at: index + 1)
-        return Operation(kind: .remove, position: atom.id.position, site: site, char: atom.char)
+        return RemoteOperation(kind: .remove, position: atom.id.position, site: site, char: atom.char)
     }
     
-    func apply(_ operation: Operation) -> LocalOperation? {
+    func apply(_ operation: RemoteOperation) -> LocalOperation? {
         switch operation.kind {
         case .insert:
             let id = atomID(with: operation.position, for: operation.site)

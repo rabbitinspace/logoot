@@ -51,7 +51,7 @@ enum OperationKind: Int, Codable {
     case remove
 }
 
-final class Operation: Codable {
+final class RemoteOperation: Codable {
 
     let kind: OperationKind
     let position: Position
